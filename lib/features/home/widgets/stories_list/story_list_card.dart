@@ -21,7 +21,7 @@ class StoryListCard extends StatelessWidget {
   });
 
   String? get _storyTitle {
-    if (categoryId == AppConstant.char) return title;
+    if (categoryId == AppConstant.char) return null;
     if (categoryId == AppConstant.tarbawia) return null;
     if (categoryId == AppConstant.surah) return null;
     return null;

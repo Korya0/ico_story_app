@@ -18,8 +18,8 @@ void main() async {
   ]);
   await SharedPref().instantiatePreferences();
   runApp(
-    DevicePreview(enabled: !kReleaseMode, builder: (context) => const MyApp()),
-    //  MyApp(),
+    // DevicePreview(enabled: !kReleaseMode, builder: (context) => const MyApp()),
+    MyApp(),
   );
 }
 
