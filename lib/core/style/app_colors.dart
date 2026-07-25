@@ -1,4 +1,3 @@
-// App Colors Class
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -10,7 +9,6 @@ class AppColors {
   static const Color soundBackground = Color(0xFF1F2937);
   static const Color cardBackground = white;
 
-  // Extended semantic colors
   static const Color textPrimary = Colors.white;
   static const Color textSecondary = Colors.black;
 }

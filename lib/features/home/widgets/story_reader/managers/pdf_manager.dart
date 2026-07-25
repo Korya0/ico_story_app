@@ -1,27 +1,27 @@
-// ignore_for_file: deprecated_member_use, avoid_print, depend_on_referenced_packages
+// ignore_for_file: use_setters_to_change_properties
 
 import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
 
 class PDFManager {
-  final String pdfAssetPath;
-  final String storyTitle;
-  final VoidCallback onStateChanged;
-
-  // State
-  String? localPdfPath;
-  int currentPage = 0;
-  int totalPages = 0;
-  bool pdfReady = false;
-  PDFViewController? pdfViewController;
-
   PDFManager({
     required this.pdfAssetPath,
     required this.storyTitle,
     required this.onStateChanged,
   });
+  final String pdfAssetPath;
+  final String storyTitle;
+  final VoidCallback onStateChanged;
+
+  String? localPdfPath;
+  int currentPage = 0;
+  int totalPages = 0;
+  bool pdfReady = false;
+  PDFViewController? pdfViewController;
 
   Future<void> initialize() async {
     await _loadPdfFromAssets();
@@ -39,7 +39,7 @@ class PDFManager {
       pdfReady = true;
       onStateChanged();
     } catch (e) {
-      print('PDF loading error: $e');
+      debugPrint('PDF loading error: $e');
     }
   }
 
@@ -76,7 +76,5 @@ class PDFManager {
     onStateChanged();
   }
 
-  void dispose() {
-    // nothing to dispose for now
-  }
+  void dispose() {}
 }

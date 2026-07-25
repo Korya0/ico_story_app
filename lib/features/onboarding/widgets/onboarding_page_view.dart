@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:ico_story_app/features/onboarding/model/onboarding_model.dart';
 import 'package:ico_story_app/features/onboarding/widgets/onboarding_widget.dart';
 
 class OnboardingPageView extends StatelessWidget {
-  final PageController controller;
-  final List pages;
-  final int currentPage;
-  final Function(int) onPageChanged;
-  final VoidCallback? onGetStarted;
-
   const OnboardingPageView({
-    super.key,
     required this.controller,
     required this.pages,
     required this.currentPage,
     required this.onPageChanged,
+    super.key,
     this.onGetStarted,
   });
+  final PageController controller;
+  final List<OnboardingModel> pages;
+  final int currentPage;
+  final void Function(int) onPageChanged;
+  final VoidCallback? onGetStarted;
 
   @override
   Widget build(BuildContext context) {

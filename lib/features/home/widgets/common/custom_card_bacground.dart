@@ -1,12 +1,10 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 
 class CustomCardBacground extends StatelessWidget {
   const CustomCardBacground({
-    super.key,
     required this.child,
+    super.key,
     this.padding,
     this.borderRadius,
     this.height,
@@ -22,22 +20,22 @@ class CustomCardBacground extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      padding: padding ?? EdgeInsets.all(16),
+      padding: padding ?? const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.white.withOpacity(0.15),
-            AppColors.secondary.withOpacity(0.1),
+            AppColors.white.withValues(alpha: 0.15),
+            AppColors.secondary.withValues(alpha: 0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(borderRadius ?? 20),
-        border: Border.all(color: AppColors.white.withOpacity(0.3), width: 2),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.3), width: 2),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             spreadRadius: 2,
             blurRadius: 10,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),

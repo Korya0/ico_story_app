@@ -1,6 +1,4 @@
-// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
-import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/core/widgets/animate_do.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
@@ -8,14 +6,13 @@ import 'package:ico_story_app/features/home/widgets/common/custom_card_bacground
 import 'package:ico_story_app/features/onboarding/model/onboarding_model.dart';
 
 class OnboardingWidget extends StatelessWidget {
-  final OnboardingModel page;
-  final int animationDelay;
-
   const OnboardingWidget({
-    super.key,
     required this.page,
+    super.key,
     this.animationDelay = 0,
   });
+  final OnboardingModel page;
+  final int animationDelay;
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +36,14 @@ class OnboardingWidget extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(24),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AppAnimations.fadeInUp(
             CustomCardBacground(
               borderRadius: 10000,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: iconOrImage,
             ),
             delay: Duration(milliseconds: animationDelay),
@@ -55,7 +52,6 @@ class OnboardingWidget extends StatelessWidget {
           AppAnimations.fadeInUp(
             CustomText(
               page.title,
-              color: AppColors.textPrimary,
               textAlign: TextAlign.center,
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -66,10 +62,8 @@ class OnboardingWidget extends StatelessWidget {
           AppAnimations.fadeInUp(
             CustomText(
               page.description,
-              color: AppColors.textPrimary,
               textAlign: TextAlign.center,
               fontSize: 18,
-              fontWeight: FontWeight.w400,
             ),
             delay: Duration(milliseconds: animationDelay + 400),
           ),

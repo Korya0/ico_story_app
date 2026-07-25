@@ -1,7 +1,7 @@
-// ignore_for_file: deprecated_member_use, avoid_print
 import 'package:flutter/material.dart';
+import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
-import 'package:ico_story_app/core/constants/app_constant.dart';
+import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/widgets/background_container.dart';
 import 'package:ico_story_app/features/home/models/story_model.dart';
 import 'package:ico_story_app/features/home/widgets/story_reader/story_reader_header.dart';
@@ -11,10 +11,9 @@ import 'package:ico_story_app/features/home/widgets/story_reader/managers/audio_
 import 'package:ico_story_app/features/home/widgets/story_reader/managers/pdf_manager.dart';
 
 class StoryReaderView extends StatefulWidget {
+  const StoryReaderView({required this.story, super.key, this.categoryId});
   final StoryModel story;
   final String? categoryId;
-
-  const StoryReaderView({super.key, required this.story, this.categoryId});
 
   @override
   State<StoryReaderView> createState() => _StoryReaderViewState();
@@ -22,25 +21,21 @@ class StoryReaderView extends StatefulWidget {
 
 class _StoryReaderViewState extends State<StoryReaderView>
     with TickerProviderStateMixin, WidgetsBindingObserver {
-  // Audio Manager
   AudioManager? _audioManager;
 
-  // PDF Manager
   late PDFManager _pdfManager;
 
-  // Animation Controllers
   late AnimationController _waveController;
 
-  // State
   bool _showAudioControls = false;
   final Alignment _pageAlignment = Alignment.center;
-  bool _isPdfLoaded = false; // حالة تحميل PDF
+  bool _isPdfLoaded = false;
 
-  bool get _isSurah => widget.categoryId == AppConstant.surah;
+  bool get _isSurah => widget.categoryId == AppKeys.sira;
   String? get _storyTypeLabel {
     if (_isSurah) return null;
-    if (widget.categoryId == AppConstant.tarbawia) return 'الأنشودة';
-    if (widget.categoryId == AppConstant.char) return 'القصة';
+    if (widget.categoryId == AppKeys.tarbawia) return AppStrings.storyTypeNasheed;
+    if (widget.categoryId == AppKeys.char) return AppStrings.storyTypeQissa;
     return null;
   }
 
@@ -80,7 +75,6 @@ class _StoryReaderViewState extends State<StoryReaderView>
     )..repeat();
   }
 
-  // Callback عند اكتمال تحميل PDF
   void _onPdfLoaded() {
     if (mounted) {
       setState(() {
@@ -116,7 +110,6 @@ class _StoryReaderViewState extends State<StoryReaderView>
         color: AppColors.primary,
         child: Column(
           children: [
-            // Header - يظهر فقط بعد التحميل
             if (_isPdfLoaded)
               StoryReaderHeader(
                 storyTitle: widget.story.title,
@@ -128,26 +121,21 @@ class _StoryReaderViewState extends State<StoryReaderView>
                 storyType: _storyTypeLabel,
                 isAudioVisible: _showAudioControls && !_isSurah,
               ),
-
-            // Main Content Area
             Expanded(
-              child: Container(
+              child: ColoredBox(
                 color: AppColors.cardBackground,
                 child: Stack(
                   children: [
-                    // PDF Viewer - Main Content
                     Positioned.fill(
                       child: PdfBookFlipLocal(
                         alignment: _pageAlignment,
                         pdfPath: widget.story.pdfPath,
-                        onPdfLoaded: _onPdfLoaded, // Callback للتحميل
+                        onPdfLoaded: _onPdfLoaded,
                       ),
                     ),
-
-                    // Loading Overlay - يغطي كل شيء أثناء التحميل
                     if (!_isPdfLoaded)
-                      Positioned.fill(
-                        child: Container(
+                      const Positioned.fill(
+                        child: ColoredBox(
                           color: AppColors.primary,
                           child: Center(
                             child: CircularProgressIndicator(
@@ -157,8 +145,6 @@ class _StoryReaderViewState extends State<StoryReaderView>
                           ),
                         ),
                       ),
-
-                    // Audio Controls - يظهر فقط بعد التحميل
                     if (_isPdfLoaded &&
                         _showAudioControls &&
                         !_isSurah &&

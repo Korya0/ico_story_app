@@ -3,7 +3,7 @@ import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/features/home/widgets/common/custom_card_bacground.dart';
 
 class CustomIconBackground extends StatelessWidget {
-  const CustomIconBackground({super.key, required this.child, this.onTap});
+  const CustomIconBackground({required this.child, super.key, this.onTap});
   final Widget child;
   final void Function()? onTap;
   @override

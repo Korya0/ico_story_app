@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
@@ -24,7 +25,7 @@ class HomeHeaderSection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.cardBackground,
                   ),
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: Image.asset(
                     'assets/images/app/icologo.png',
                     width: isTablet ? 200 : 100,
@@ -36,7 +37,7 @@ class HomeHeaderSection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.cardBackground,
                   ),
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: Image.asset(
                     'assets/images/app/directaid.png',
                     width: isTablet ? 220 : 100,
@@ -47,19 +48,16 @@ class HomeHeaderSection extends StatelessWidget {
             ),
             Gap(isTablet ? 24 : 18),
             CustomText(
-              '🌟 أهلاً بك في عالم القصص 🌟',
+              AppStrings.welcomeTitle,
               fontSize: isTablet ? 20 : 18,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
               textAlign: TextAlign.center,
             ),
             Gap(isTablet ? 16 : 8),
             CustomText(
-              'اختر مجموعة القصص المفضلة لديك\n واستمتع بالمغامرة',
+              AppStrings.welcomeSubtitle,
               fontSize: isTablet ? 18 : 16,
-              color: AppColors.textPrimary,
               textAlign: TextAlign.center,
-              fontWeight: FontWeight.w400,
             ),
           ],
         ),

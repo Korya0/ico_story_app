@@ -1,17 +1,14 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
 
 class HomeStoryCard extends StatelessWidget {
   const HomeStoryCard({
-    super.key,
     required this.imagePath,
     required this.title,
+    super.key,
     this.onTap,
   });
   final String imagePath;
@@ -24,16 +21,15 @@ class HomeStoryCard extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          // image card
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300, width: 2),
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 4,
-                  offset: Offset(0, 2),
+                  offset: const Offset(0, 2),
                 ),
               ],
             ),
@@ -46,14 +42,10 @@ class HomeStoryCard extends StatelessWidget {
               ),
             ),
           ),
-
-          Gap(12),
-
-          // title
+          const Gap(12),
           CustomText(
             title,
             fontSize: isTablet ? 20 : 18.h,
-            color: AppColors.textPrimary,
             fontWeight: FontWeight.w700,
           ),
         ],

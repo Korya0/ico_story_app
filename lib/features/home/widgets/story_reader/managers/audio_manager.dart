@@ -1,30 +1,25 @@
-// ignore_for_file: deprecated_member_use, avoid_print
-
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 
 class AudioManager {
+  AudioManager({required this.audioAssetPath, required this.onStateChanged});
   final String audioAssetPath;
   final VoidCallback onStateChanged;
 
   late AudioPlayer _audioPlayer;
 
-  // Stream subscriptions to cancel on dispose
   StreamSubscription<Duration>? _durationSubscription;
   StreamSubscription<Duration>? _positionSubscription;
   StreamSubscription<PlayerState>? _stateSubscription;
   StreamSubscription<void>? _completeSubscription;
 
-  // State
   bool isPlaying = false;
   bool isLoading = true;
   Duration currentPosition = Duration.zero;
   Duration totalDuration = Duration.zero;
-  double playbackSpeed = 1.0;
+  double playbackSpeed = 1;
   double volume = 0.8;
-
-  AudioManager({required this.audioAssetPath, required this.onStateChanged});
 
   Future<void> initialize() async {
     _audioPlayer = AudioPlayer();
@@ -60,7 +55,7 @@ class AudioManager {
     try {
       await _audioPlayer.setSource(AssetSource(audioAssetPath));
     } catch (e) {
-      print('Audio loading error: $e');
+      debugPrint('Audio loading error: $e');
       isLoading = false;
       onStateChanged();
     }
@@ -74,7 +69,7 @@ class AudioManager {
         await _audioPlayer.resume();
       }
     } catch (e) {
-      print('Play/Pause error: $e');
+      debugPrint('Play/Pause error: $e');
     }
   }
 
@@ -82,7 +77,7 @@ class AudioManager {
     try {
       await _audioPlayer.seek(position);
     } catch (e) {
-      print('Seek error: $e');
+      debugPrint('Seek error: $e');
     }
   }
 
@@ -90,13 +85,9 @@ class AudioManager {
     await seekTo(Duration.zero);
   }
 
-  Future<void> setSpeed(double speed) async {
-    // Speed control disabled per requirements
-  }
+  Future<void> setSpeed(double speed) async {}
 
-  Future<void> setVolume(double vol) async {
-    // Volume control disabled per requirements
-  }
+  Future<void> setVolume(double vol) async {}
 
   Future<void> handleAppLifecyclePause() async {
     try {
@@ -104,18 +95,15 @@ class AudioManager {
         await _audioPlayer.pause();
       }
     } catch (e) {
-      print('Lifecycle pause error: $e');
+      debugPrint('Lifecycle pause error: $e');
     }
   }
 
   void dispose() {
-    // Cancel all stream subscriptions first
     _durationSubscription?.cancel();
     _positionSubscription?.cancel();
     _stateSubscription?.cancel();
     _completeSubscription?.cancel();
-
-    // Then dispose the audio player
     _audioPlayer.dispose();
   }
 }

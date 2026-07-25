@@ -7,7 +7,7 @@ import 'package:ico_story_app/features/home/data/story_list.dart';
 import 'package:ico_story_app/features/home/widgets/stories_list/story_list_card.dart';
 
 class StoriesListSection extends StatelessWidget {
-  const StoriesListSection({super.key, required this.categoryTitle});
+  const StoriesListSection({required this.categoryTitle, super.key});
 
   final String categoryTitle;
 

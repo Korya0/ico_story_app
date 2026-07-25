@@ -1,40 +1,50 @@
-// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
+import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/widgets/custom_button.dart';
 
 class OnboardingBottomNavigation extends StatelessWidget {
+  const OnboardingBottomNavigation({
+    required this.currentPage,
+    required this.totalPages,
+    super.key,
+    this.onNext,
+    this.onGetStarted,
+  });
   final int currentPage;
   final int totalPages;
   final VoidCallback? onNext;
   final VoidCallback? onGetStarted;
-
-  const OnboardingBottomNavigation({
-    super.key,
-    required this.currentPage,
-    required this.totalPages,
-    this.onNext,
-    this.onGetStarted,
-  });
 
   bool get isLastPage => currentPage == totalPages - 1;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildPageIndicator(),
+          _PageIndicator(currentPage: currentPage, totalPages: totalPages),
           const SizedBox(height: 24),
-          isLastPage ? _buildGetStartedButton() : _buildNextButton(),
+          if (isLastPage)
+            _GetStartedButton(onGetStarted: onGetStarted)
+          else
+            _NextButton(onNext: onNext),
         ],
       ),
     );
   }
+}
 
-  Widget _buildPageIndicator() {
+class _PageIndicator extends StatelessWidget {
+  const _PageIndicator({required this.currentPage, required this.totalPages});
+
+  final int currentPage;
+  final int totalPages;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
@@ -47,19 +57,33 @@ class OnboardingBottomNavigation extends StatelessWidget {
           decoration: BoxDecoration(
             color: currentPage == index
                 ? AppColors.white
-                : AppColors.white.withOpacity(0.4),
+                : AppColors.white.withValues(alpha: 0.4),
             borderRadius: BorderRadius.circular(4),
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _buildNextButton() {
-    return CustomButton(text: "التالي", onPressed: onNext);
+class _NextButton extends StatelessWidget {
+  const _NextButton({required this.onNext});
+
+  final VoidCallback? onNext;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomButton(text: AppStrings.next, onPressed: onNext);
   }
+}
 
-  Widget _buildGetStartedButton() {
-    return CustomButton(text: "ابدأ الآن", onPressed: onGetStarted);
+class _GetStartedButton extends StatelessWidget {
+  const _GetStartedButton({required this.onGetStarted});
+
+  final VoidCallback? onGetStarted;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomButton(text: AppStrings.startNow, onPressed: onGetStarted);
   }
 }

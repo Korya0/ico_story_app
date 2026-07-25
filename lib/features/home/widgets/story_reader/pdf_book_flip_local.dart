@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use, avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
@@ -8,15 +6,15 @@ import 'package:pdfx/pdfx.dart';
 
 class PdfBookFlipLocal extends StatefulWidget {
   const PdfBookFlipLocal({
-    super.key,
     required this.pdfPath,
+    super.key,
     this.alignment = Alignment.center,
-    this.onPdfLoaded, // إضافة callback
+    this.onPdfLoaded,
   });
 
   final String pdfPath;
   final Alignment alignment;
-  final VoidCallback? onPdfLoaded; // Callback عند اكتمال التحميل
+  final VoidCallback? onPdfLoaded;
 
   @override
   State<PdfBookFlipLocal> createState() => _PdfBookFlipLocalState();
@@ -44,13 +42,12 @@ class _PdfBookFlipLocalState extends State<PdfBookFlipLocal> {
     try {
       final doc = await PdfDocument.openAsset(widget.pdfPath);
 
-      for (int i = 1; i <= doc.pagesCount; i++) {
+      for (var i = 1; i <= doc.pagesCount; i++) {
         final page = await doc.getPage(i);
 
         final pageImage = await page.render(
           width: page.width * 0.7,
           height: page.height * 2,
-          format: PdfPageImageFormat.jpeg,
         );
 
         if (pageImage != null) {
@@ -65,11 +62,10 @@ class _PdfBookFlipLocalState extends State<PdfBookFlipLocal> {
           _isLoading = false;
         });
 
-        // استدعاء callback بعد اكتمال التحميل
         widget.onPdfLoaded?.call();
       }
     } catch (e) {
-      print('Error loading PDF: $e');
+      debugPrint('Error loading PDF: $e');
       if (mounted) {
         setState(() {
           _isLoading = false;
@@ -80,7 +76,6 @@ class _PdfBookFlipLocalState extends State<PdfBookFlipLocal> {
 
   @override
   Widget build(BuildContext context) {
-    // لا نعرض شيء أثناء التحميل (الـ loading يتم في StoryReaderView)
     if (_isLoading || pages.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -89,17 +84,13 @@ class _PdfBookFlipLocalState extends State<PdfBookFlipLocal> {
       body: SizedBox.expand(
         child: Transform(
           alignment: Alignment.center,
-          transform: Matrix4.rotationY(
-            3.141592653589793,
-          ), // عكس الاتجاه بالكامل
+          transform: Matrix4.rotationY(3.141592653589793),
           child: PageFlipWidget(
             key: _controller,
             children: pages.map((img) {
               return Transform(
                 alignment: Alignment.center,
-                transform: Matrix4.rotationY(
-                  3.141592653589793,
-                ), // نرجع الصورة طبيعية
+                transform: Matrix4.rotationY(3.141592653589793),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     return Container(
@@ -128,8 +119,8 @@ class _PdfBookFlipLocalState extends State<PdfBookFlipLocal> {
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                     colors: [
-                                      AppColors.primary.withOpacity(0.3),
-                                      AppColors.primary.withOpacity(0.0),
+                                      AppColors.primary.withValues(alpha: 0.3),
+                                      AppColors.primary.withValues(alpha: 0),
                                     ],
                                   ),
                                 ),

@@ -3,22 +3,21 @@ import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 
 class CustomText extends StatelessWidget {
+  const CustomText(
+    this.text, {
+    required this.fontSize,
+    super.key,
+    this.tabletFontSize,
+    this.fontWeight = FontWeight.normal,
+    this.color = AppColors.textPrimary,
+    this.textAlign = TextAlign.start,
+  });
   final String text;
   final double fontSize;
   final double? tabletFontSize;
   final FontWeight fontWeight;
   final Color color;
   final TextAlign textAlign;
-
-  const CustomText(
-    this.text, {
-    super.key,
-    required this.fontSize,
-    this.tabletFontSize,
-    this.fontWeight = FontWeight.normal,
-    this.color = AppColors.textPrimary,
-    this.textAlign = TextAlign.start,
-  });
 
   @override
   Widget build(BuildContext context) {

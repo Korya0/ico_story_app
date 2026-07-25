@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ico_story_app/core/constants/app_constant.dart';
-import 'app_colors.dart';
+import 'package:ico_story_app/core/style/app_colors.dart';
 
-// App Theme Class
 class AppTheme {
-  static ThemeData get childTheme {
+  static ThemeData get appTheme {
     return ThemeData(
       scaffoldBackgroundColor: AppColors.primary,
       primaryColor: AppColors.primary,

@@ -1,16 +1,13 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 
 class BackgroundContainer extends StatelessWidget {
-  final Color color;
-  final Widget child;
-
   const BackgroundContainer({
-    super.key,
     required this.color,
     required this.child,
+    super.key,
   });
+  final Color color;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +16,7 @@ class BackgroundContainer extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [color, color.withOpacity(0.8)],
+          colors: [color, color.withValues(alpha: 0.8)],
         ),
       ),
       child: SafeArea(child: child),

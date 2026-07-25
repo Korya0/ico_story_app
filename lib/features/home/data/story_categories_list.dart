@@ -1,21 +1,21 @@
 import 'package:ico_story_app/core/constants/app_assets.dart';
-import 'package:ico_story_app/core/constants/app_constant.dart';
+import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/features/home/models/story_category_model.dart';
 
 class StoryCategoriesList {
   static List<StoryCategoryModel> get categories => [
     StoryCategoryModel(
-      id: AppConstant.char,
+      id: AppKeys.char,
       title: 'قصص الحروف',
       imagePath: AppAssets.charsStories,
     ),
     StoryCategoryModel(
-      id: AppConstant.tarbawia,
+      id: AppKeys.tarbawia,
       title: 'كنوز القيم',
       imagePath: AppAssets.knoozStories,
     ),
     StoryCategoryModel(
-      id: AppConstant.surah,
+      id: AppKeys.sira,
       title: 'قصص السيرة النبوية',
       imagePath: AppAssets.serahStories,
     ),
