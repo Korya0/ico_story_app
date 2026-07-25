@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 
-class CustomCardBacground extends StatelessWidget {
-  const CustomCardBacground({
+class CustomCardBackground extends StatelessWidget {
+  const CustomCardBackground({
     required this.child,
     super.key,
     this.padding,

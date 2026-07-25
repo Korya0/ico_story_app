@@ -6,9 +6,9 @@ import 'package:ico_story_app/core/services/pref_keys.dart';
 import 'package:ico_story_app/core/services/shared_pref.dart';
 import 'package:ico_story_app/core/widgets/background_container.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
+import 'package:ico_story_app/features/onboarding/data/onboarding_pages.dart';
 import 'package:ico_story_app/features/onboarding/widgets/onboarding_bottom_navigation.dart';
 import 'package:ico_story_app/features/onboarding/widgets/onboarding_page_view.dart';
-import 'package:ico_story_app/features/onboarding/model/onboarding_model.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -18,7 +18,7 @@ class OnboardingView extends StatefulWidget {
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
-  final _pages = OnboardingModel.pages;
+  final _pages = OnboardingPages.pages;
   final PageController _pageController = PageController();
   int _currentPage = 0;
 

@@ -5,14 +5,14 @@ import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
 import 'package:ico_story_app/features/home/widgets/home_view/social_media_row.dart';
-import 'package:ico_story_app/features/home/widgets/common/custom_card_bacground.dart';
+import 'package:ico_story_app/features/home/widgets/common/custom_card_background.dart';
 
 class SocialButton extends StatelessWidget {
   const SocialButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CustomCardBacground(
+    return CustomCardBackground(
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Center(
         child: Column(

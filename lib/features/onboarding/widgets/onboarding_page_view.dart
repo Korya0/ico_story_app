@@ -9,13 +9,11 @@ class OnboardingPageView extends StatelessWidget {
     required this.currentPage,
     required this.onPageChanged,
     super.key,
-    this.onGetStarted,
   });
   final PageController controller;
   final List<OnboardingModel> pages;
   final int currentPage;
   final void Function(int) onPageChanged;
-  final VoidCallback? onGetStarted;
 
   @override
   Widget build(BuildContext context) {

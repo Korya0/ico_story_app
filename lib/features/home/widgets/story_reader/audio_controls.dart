@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/managers/audio_manager.dart';
+import 'package:ico_story_app/features/home/widgets/story_reader/cubit/audio_cubit.dart';
 
 class AudioControls extends StatefulWidget {
   const AudioControls({
-    required this.audioManager,
     required this.categoryColor,
     super.key,
   });
-  final AudioManager audioManager;
   final Color categoryColor;
 
   @override
@@ -49,7 +48,8 @@ class _AudioControlsState extends State<AudioControls>
       CurvedAnimation(parent: _waveController, curve: Curves.easeInOut),
     );
 
-    if (widget.audioManager.isPlaying) {
+    final cubit = context.read<AudioCubit>();
+    if (cubit.state.isPlaying) {
       _waveController.repeat(reverse: true);
     }
   }
@@ -67,8 +67,8 @@ class _AudioControlsState extends State<AudioControls>
     });
   }
 
-  void _updateAnimations() {
-    if (widget.audioManager.isPlaying) {
+  void _updateAnimations(bool isPlaying) {
+    if (isPlaying) {
       _waveController.repeat(reverse: true);
     } else {
       _waveController.stop();
@@ -78,99 +78,107 @@ class _AudioControlsState extends State<AudioControls>
   @override
   Widget build(BuildContext context) {
     final isTablet = context.isTablet;
-    _updateAnimations();
 
-    return Container(
-      padding: EdgeInsets.all(isTablet ? 20 : 16),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            widget.categoryColor.withValues(alpha: 0.9),
-            AppColors.primary.withValues(alpha: 0.8),
-          ],
-        ),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(isTablet ? 24 : 20),
-          topRight: Radius.circular(isTablet ? 24 : 20),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: widget.categoryColor.withValues(alpha: 0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+    return BlocBuilder<AudioCubit, AudioState>(
+      builder: (context, state) {
+        final cubit = context.read<AudioCubit>();
+        _updateAnimations(state.isPlaying);
+
+        return Container(
+          padding: EdgeInsets.all(isTablet ? 20 : 16),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                widget.categoryColor.withValues(alpha: 0.9),
+                AppColors.primary.withValues(alpha: 0.8),
+              ],
+            ),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(isTablet ? 24 : 20),
+              topRight: Radius.circular(isTablet ? 24 : 20),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: widget.categoryColor.withValues(alpha: 0.3),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+          child: Column(
+            children: [
+              _TitleSection(
+                isPlaying: state.isPlaying,
+                waveAnimation: _waveAnimation,
+                isTablet: isTablet,
+              ),
+              Gap(isTablet ? 20 : 16),
+              _TimeDisplay(
+                currentPosition: state.currentPosition,
+                totalDuration: state.totalDuration,
+                isSliderDragging: _isSliderDragging,
+                sliderValue: _sliderValue,
+                isTablet: isTablet,
+              ),
+              Gap(isTablet ? 16 : 12),
+              _ProgressSlider(
+                progress: state.progress,
+                isSliderDragging: _isSliderDragging,
+                sliderValue: _sliderValue,
+                isTablet: isTablet,
+                onChangeStart: (value) {
+                  setState(() {
+                    _isSliderDragging = true;
+                    _sliderValue = value;
+                  });
+                  HapticFeedback.lightImpact();
+                },
+                onChanged: _onSliderChanged,
+                onChangeEnd: (value) {
+                  final position = Duration(
+                    milliseconds:
+                        (value * state.totalDuration.inMilliseconds).round(),
+                  );
+                  cubit.seekTo(position);
+                  setState(() {
+                    _isSliderDragging = false;
+                  });
+                  HapticFeedback.selectionClick();
+                },
+              ),
+              Gap(isTablet ? 20 : 16),
+              _ControlButtons(
+                isPlaying: state.isPlaying,
+                isLoading: state.isLoading,
+                currentPosition: state.currentPosition,
+                scaleAnimation: _scaleAnimation,
+                playButtonController: _playButtonController,
+                categoryColor: widget.categoryColor,
+                isTablet: isTablet,
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Column(
-        children: [
-          _TitleSection(
-            audioManager: widget.audioManager,
-            waveAnimation: _waveAnimation,
-            isTablet: isTablet,
-          ),
-          Gap(isTablet ? 20 : 16),
-          _TimeDisplay(
-            audioManager: widget.audioManager,
-            isSliderDragging: _isSliderDragging,
-            sliderValue: _sliderValue,
-            isTablet: isTablet,
-          ),
-          Gap(isTablet ? 16 : 12),
-          _ProgressSlider(
-            audioManager: widget.audioManager,
-            isSliderDragging: _isSliderDragging,
-            sliderValue: _sliderValue,
-            isTablet: isTablet,
-            onChangeStart: (value) {
-              setState(() {
-                _isSliderDragging = true;
-                _sliderValue = value;
-              });
-              HapticFeedback.lightImpact();
-            },
-            onChanged: _onSliderChanged,
-            onChangeEnd: (value) {
-              final position = Duration(
-                milliseconds:
-                    (value * widget.audioManager.totalDuration.inMilliseconds)
-                        .round(),
-              );
-              widget.audioManager.seekTo(position);
-              setState(() {
-                _isSliderDragging = false;
-              });
-              HapticFeedback.selectionClick();
-            },
-          ),
-          Gap(isTablet ? 20 : 16),
-          _ControlButtons(
-            audioManager: widget.audioManager,
-            scaleAnimation: _scaleAnimation,
-            playButtonController: _playButtonController,
-            categoryColor: widget.categoryColor,
-            isTablet: isTablet,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
 
 class _TitleSection extends AnimatedWidget {
   const _TitleSection({
-    required this.audioManager,
+    required this.isPlaying,
     required Animation<double> waveAnimation,
     required this.isTablet,
   }) : super(listenable: waveAnimation);
 
-  final AudioManager audioManager;
+  final bool isPlaying;
   final bool isTablet;
 
   Animation<double> get _waveAnimation => listenable as Animation<double>;
@@ -188,7 +196,7 @@ class _TitleSection extends AnimatedWidget {
               height: 16 + (8 * animationValue),
               margin: const EdgeInsets.only(right: 2),
               decoration: BoxDecoration(
-                color: audioManager.isPlaying
+                color: isPlaying
                     ? Colors.white
                     : Colors.white.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(2),
@@ -199,7 +207,7 @@ class _TitleSection extends AnimatedWidget {
         const Gap(12),
         const Spacer(),
         Icon(
-          audioManager.isPlaying ? Icons.volume_up : Icons.volume_off,
+          isPlaying ? Icons.volume_up : Icons.volume_off,
           color: AppColors.textPrimary.withValues(alpha: 0.8),
           size: isTablet ? 22 : 20,
         ),
@@ -210,13 +218,15 @@ class _TitleSection extends AnimatedWidget {
 
 class _TimeDisplay extends StatelessWidget {
   const _TimeDisplay({
-    required this.audioManager,
+    required this.currentPosition,
+    required this.totalDuration,
     required this.isSliderDragging,
     required this.sliderValue,
     required this.isTablet,
   });
 
-  final AudioManager audioManager;
+  final Duration currentPosition;
+  final Duration totalDuration;
   final bool isSliderDragging;
   final double sliderValue;
   final bool isTablet;
@@ -241,11 +251,9 @@ class _TimeDisplay extends StatelessWidget {
               isSliderDragging
                   ? Duration(
                       milliseconds:
-                          (sliderValue *
-                                  audioManager.totalDuration.inMilliseconds)
-                              .round(),
+                          (sliderValue * totalDuration.inMilliseconds).round(),
                     )
-                  : audioManager.currentPosition,
+                  : currentPosition,
             ),
             isTablet: isTablet,
             label: AppStrings.current,
@@ -266,7 +274,7 @@ class _TimeDisplay extends StatelessWidget {
             ),
           ),
           _TimeText(
-            time: _formatDuration(audioManager.totalDuration),
+            time: _formatDuration(totalDuration),
             isTablet: isTablet,
             label: AppStrings.total,
           ),
@@ -316,7 +324,7 @@ class _TimeText extends StatelessWidget {
 
 class _ProgressSlider extends StatelessWidget {
   const _ProgressSlider({
-    required this.audioManager,
+    required this.progress,
     required this.isSliderDragging,
     required this.sliderValue,
     required this.isTablet,
@@ -325,7 +333,7 @@ class _ProgressSlider extends StatelessWidget {
     required this.onChangeEnd,
   });
 
-  final AudioManager audioManager;
+  final double progress;
   final bool isSliderDragging;
   final double sliderValue;
   final bool isTablet;
@@ -335,11 +343,6 @@ class _ProgressSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final progress = audioManager.totalDuration.inMilliseconds > 0
-        ? audioManager.currentPosition.inMilliseconds /
-              audioManager.totalDuration.inMilliseconds
-        : 0.0;
-
     return Column(
       children: [
         SliderTheme(
@@ -388,14 +391,18 @@ class _ProgressSlider extends StatelessWidget {
 
 class _ControlButtons extends StatelessWidget {
   const _ControlButtons({
-    required this.audioManager,
+    required this.isPlaying,
+    required this.isLoading,
+    required this.currentPosition,
     required this.scaleAnimation,
     required this.playButtonController,
     required this.categoryColor,
     required this.isTablet,
   });
 
-  final AudioManager audioManager;
+  final bool isPlaying;
+  final bool isLoading;
+  final Duration currentPosition;
   final Animation<double> scaleAnimation;
   final AnimationController playButtonController;
   final Color categoryColor;
@@ -403,15 +410,14 @@ class _ControlButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AudioCubit>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _SecondaryButton(
           icon: Icons.replay_10,
           onTap: () {
-            final newPosition =
-                audioManager.currentPosition - const Duration(seconds: 10);
-            audioManager.seekTo(newPosition);
+            cubit.seekTo(currentPosition - const Duration(seconds: 10));
             HapticFeedback.lightImpact();
           },
           isTablet: isTablet,
@@ -425,7 +431,7 @@ class _ControlButtons extends StatelessWidget {
           },
           onTapCancel: playButtonController.reverse,
           onTap: () {
-            audioManager.togglePlayPause();
+            cubit.togglePlayPause();
             HapticFeedback.mediumImpact();
           },
           child: AnimatedBuilder(
@@ -447,7 +453,7 @@ class _ControlButtons extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: audioManager.isLoading
+                  child: isLoading
                       ? Center(
                           child: SizedBox(
                             width: isTablet ? 28 : 24,
@@ -459,7 +465,7 @@ class _ControlButtons extends StatelessWidget {
                           ),
                         )
                       : Icon(
-                          audioManager.isPlaying
+                          isPlaying
                               ? Icons.pause_rounded
                               : Icons.play_arrow_rounded,
                           color: categoryColor,
@@ -473,9 +479,7 @@ class _ControlButtons extends StatelessWidget {
         _SecondaryButton(
           icon: Icons.forward_10,
           onTap: () {
-            final newPosition =
-                audioManager.currentPosition + const Duration(seconds: 10);
-            audioManager.seekTo(newPosition);
+            cubit.seekTo(currentPosition + const Duration(seconds: 10));
             HapticFeedback.lightImpact();
           },
           isTablet: isTablet,

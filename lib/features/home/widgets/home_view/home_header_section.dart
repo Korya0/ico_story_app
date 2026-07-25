@@ -4,7 +4,7 @@ import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
-import 'package:ico_story_app/features/home/widgets/common/custom_card_bacground.dart';
+import 'package:ico_story_app/features/home/widgets/common/custom_card_background.dart';
 
 class HomeHeaderSection extends StatelessWidget {
   const HomeHeaderSection({super.key});
@@ -12,7 +12,7 @@ class HomeHeaderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTablet = context.isTablet;
-    return CustomCardBacground(
+    return CustomCardBackground(
       child: Center(
         child: Column(
           children: [

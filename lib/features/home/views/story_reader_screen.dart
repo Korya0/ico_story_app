@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/widgets/background_container.dart';
 import 'package:ico_story_app/features/home/models/story_model.dart';
+import 'package:ico_story_app/features/home/widgets/story_reader/cubit/audio_cubit.dart';
 import 'package:ico_story_app/features/home/widgets/story_reader/story_reader_header.dart';
 import 'package:ico_story_app/features/home/widgets/story_reader/pdf_book_flip_local.dart';
 import 'package:ico_story_app/features/home/widgets/story_reader/audio_controls.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/managers/audio_manager.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/managers/pdf_manager.dart';
 
 class StoryReaderView extends StatefulWidget {
   const StoryReaderView({required this.story, super.key, this.categoryId});
@@ -21,12 +21,8 @@ class StoryReaderView extends StatefulWidget {
 
 class _StoryReaderViewState extends State<StoryReaderView>
     with TickerProviderStateMixin, WidgetsBindingObserver {
-  AudioManager? _audioManager;
-
-  late PDFManager _pdfManager;
-
+  AudioCubit? _audioCubit;
   late AnimationController _waveController;
-
   bool _showAudioControls = false;
   final Alignment _pageAlignment = Alignment.center;
   bool _isPdfLoaded = false;
@@ -43,29 +39,17 @@ class _StoryReaderViewState extends State<StoryReaderView>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _initializeManagers();
+    _initializeCubit();
     _initializeAnimations();
   }
 
-  void _initializeManagers() {
+  void _initializeCubit() {
     if (!_isSurah) {
-      _audioManager = AudioManager(
+      _audioCubit = AudioCubit(
         audioAssetPath: widget.story.audioPath ?? '',
-        onStateChanged: () {
-          if (mounted) setState(() {});
-        },
       );
-      _audioManager!.initialize();
+      _audioCubit!.initialize();
     }
-
-    _pdfManager = PDFManager(
-      pdfAssetPath: widget.story.pdfPath,
-      storyTitle: widget.story.title,
-      onStateChanged: () {
-        if (mounted) setState(() {});
-      },
-    );
-    _pdfManager.initialize();
   }
 
   void _initializeAnimations() {
@@ -85,8 +69,7 @@ class _StoryReaderViewState extends State<StoryReaderView>
 
   @override
   void dispose() {
-    _audioManager?.dispose();
-    _pdfManager.dispose();
+    _audioCubit?.close();
     _waveController.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -97,13 +80,24 @@ class _StoryReaderViewState extends State<StoryReaderView>
     if (state == AppLifecycleState.inactive ||
         state == AppLifecycleState.paused ||
         state == AppLifecycleState.detached) {
-      _audioManager?.handleAppLifecyclePause();
+      _audioCubit?.handleAppLifecyclePause();
     }
     super.didChangeAppLifecycleState(state);
   }
 
   @override
   Widget build(BuildContext context) {
+    final audioContent = _audioCubit != null
+        ? BlocProvider<AudioCubit>.value(
+            value: _audioCubit!,
+            child: _buildContent(),
+          )
+        : _buildContent();
+
+    return audioContent;
+  }
+
+  Widget _buildContent() {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: BackgroundContainer(
@@ -145,16 +139,12 @@ class _StoryReaderViewState extends State<StoryReaderView>
                           ),
                         ),
                       ),
-                    if (_isPdfLoaded &&
-                        _showAudioControls &&
-                        !_isSurah &&
-                        _audioManager != null)
-                      Positioned(
+                    if (_isPdfLoaded && _showAudioControls && !_isSurah)
+                      const Positioned(
                         left: 0,
                         right: 0,
                         bottom: 0,
                         child: AudioControls(
-                          audioManager: _audioManager!,
                           categoryColor: AppColors.soundBackground,
                         ),
                       ),

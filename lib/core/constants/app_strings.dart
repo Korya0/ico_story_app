@@ -22,15 +22,16 @@ class AppStrings {
   static const String storyTypeNasheed = 'الأنشودة';
   static const String storyTypeQissa = 'القصة';
 
-  static const String onbTitle1 = 'إنجاز نفتخر به';
-  static const String onbDesc1 =
+  static const String onboardingAchievementTitle = 'إنجاز نفتخر به';
+  static const String onboardingAchievementDesc =
       'حائزة على جائزة خليفة للإبداع التربوي على مستوى الوطن العربي';
-  static const String onbTitle2 = 'تصفح القصص بسهولة';
-  static const String onbDesc2 = 'اختر القصة المفضلة لديك وابدأ القراءة مباشرة';
-  static const String onbTitle3 = 'استمع إلى الأنشودة ';
-  static const String onbDesc3 =
+  static const String onboardingBrowseTitle = 'تصفح القصص بسهولة';
+  static const String onboardingBrowseDesc =
+      'اختر القصة المفضلة لديك وابدأ القراءة مباشرة';
+  static const String onboardingListenTitle = 'استمع إلى الأنشودة ';
+  static const String onboardingListenDesc =
       'بعد الانتهاء من كل قصة استمع إلى الأنشودة وتابع الكلمات';
-  static const String onbTitle4 = 'مرحبًا في ICO Stories';
-  static const String onbDesc4 =
+  static const String onboardingWelcomeTitle = 'مرحبًا في ICO Stories';
+  static const String onboardingWelcomeDesc =
       'استعد لمغامرة ممتعة مع القصص التعليمية و التربوية للأطفال';
 }

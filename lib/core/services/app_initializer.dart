@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ico_story_app/core/services/app_bloc_observer.dart';
+import 'package:ico_story_app/core/services/app_logger.dart';
 import 'package:ico_story_app/core/services/shared_pref.dart';
 
 class AppInitializer {
@@ -7,6 +10,8 @@ class AppInitializer {
 
   static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
+    Bloc.observer = AppBlocObserver();
+    AppLogger.info('🚀 App starting...');
 
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

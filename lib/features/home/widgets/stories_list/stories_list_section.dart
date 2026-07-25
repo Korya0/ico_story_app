@@ -35,7 +35,6 @@ class StoriesListSection extends StatelessWidget {
               extra: {'story': story, 'categoryId': categoryTitle},
             );
           },
-          categoryId: categoryTitle,
         );
       },
     );
