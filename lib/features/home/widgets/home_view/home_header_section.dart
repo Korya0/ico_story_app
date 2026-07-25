@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:ico_story_app/core/constants/app_assets.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
@@ -27,7 +28,7 @@ class HomeHeaderSection extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(12),
                   child: Image.asset(
-                    'assets/images/app/icologo.png',
+                    AppAssets.icoLogoAlt,
                     width: isTablet ? 200 : 100,
                     height: isTablet ? 200 : 100,
                   ),
@@ -39,7 +40,7 @@ class HomeHeaderSection extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(12),
                   child: Image.asset(
-                    'assets/images/app/directaid.png',
+                    AppAssets.directAid,
                     width: isTablet ? 220 : 100,
                     height: isTablet ? 200 : 100,
                   ),
