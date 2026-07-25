@@ -4,11 +4,10 @@ import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/router/app_routes.dart';
 import 'package:ico_story_app/core/services/pref_keys.dart';
 import 'package:ico_story_app/core/services/shared_pref.dart';
-import 'package:ico_story_app/core/widgets/background_container.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
-import 'package:ico_story_app/features/onboarding/data/onboarding_pages.dart';
-import 'package:ico_story_app/features/onboarding/widgets/onboarding_bottom_navigation.dart';
-import 'package:ico_story_app/features/onboarding/widgets/onboarding_page_view.dart';
+import 'package:ico_story_app/features/onboarding/presentation/models/onboarding_model.dart';
+import 'package:ico_story_app/features/onboarding/presentation/widgets/onboarding_bottom_navigation.dart';
+import 'package:ico_story_app/features/onboarding/presentation/widgets/onboarding_page_view.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -18,7 +17,7 @@ class OnboardingView extends StatefulWidget {
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
-  final _pages = OnboardingPages.pages;
+  final _pages = OnboardingModel.pages;
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -51,8 +50,8 @@ class _OnboardingViewState extends State<OnboardingView> {
     final current = _pages[_currentPage];
 
     return Scaffold(
-      body: BackgroundContainer(
-        color: current.backgroundColor,
+      backgroundColor: current.backgroundColor,
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ico_story_app/core/constants/app_keys.dart';
-import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';
-import 'package:ico_story_app/core/widgets/background_container.dart';
+import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/features/home/models/story_model.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/cubit/audio_cubit.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/story_reader_header.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/pdf_book_flip_local.dart';
 import 'package:ico_story_app/features/home/widgets/story_reader/audio_controls.dart';
+import 'package:ico_story_app/features/home/widgets/story_reader/cubit/audio_cubit.dart';
+import 'package:ico_story_app/features/home/widgets/story_reader/pdf_book_flip_local.dart';
+import 'package:ico_story_app/features/home/widgets/story_reader/story_reader_header.dart';
 
 class StoryReaderView extends StatefulWidget {
   const StoryReaderView({required this.story, super.key, this.categoryId});
@@ -30,7 +29,9 @@ class _StoryReaderViewState extends State<StoryReaderView>
   bool get _isSurah => widget.categoryId == AppKeys.sira;
   String? get _storyTypeLabel {
     if (_isSurah) return null;
-    if (widget.categoryId == AppKeys.tarbawia) return AppStrings.storyTypeNasheed;
+    if (widget.categoryId == AppKeys.tarbawia) {
+      return AppStrings.storyTypeNasheed;
+    }
     if (widget.categoryId == AppKeys.char) return AppStrings.storyTypeQissa;
     return null;
   }
@@ -45,9 +46,7 @@ class _StoryReaderViewState extends State<StoryReaderView>
 
   void _initializeCubit() {
     if (!_isSurah) {
-      _audioCubit = AudioCubit(
-        audioAssetPath: widget.story.audioPath ?? '',
-      );
+      _audioCubit = AudioCubit(audioAssetPath: widget.story.audioPath ?? '');
       _audioCubit!.initialize();
     }
   }
@@ -99,9 +98,8 @@ class _StoryReaderViewState extends State<StoryReaderView>
 
   Widget _buildContent() {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: BackgroundContainer(
-        color: AppColors.primary,
+      backgroundColor: AppColors.primary,
+      body: SafeArea(
         child: Column(
           children: [
             if (_isPdfLoaded)

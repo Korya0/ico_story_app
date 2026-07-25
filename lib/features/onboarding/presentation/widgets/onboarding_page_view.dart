@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ico_story_app/features/onboarding/model/onboarding_model.dart';
-import 'package:ico_story_app/features/onboarding/widgets/onboarding_widget.dart';
+import 'package:ico_story_app/features/onboarding/presentation/models/onboarding_model.dart';
+import 'package:ico_story_app/features/onboarding/presentation/widgets/onboarding_widget.dart';
 
 class OnboardingPageView extends StatelessWidget {
   const OnboardingPageView({

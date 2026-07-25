@@ -1,10 +1,23 @@
+import 'package:flutter/material.dart';
 import 'package:ico_story_app/core/constants/app_assets.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
-import 'package:ico_story_app/features/onboarding/model/onboarding_model.dart';
 
-class OnboardingPages {
-  OnboardingPages._();
+class OnboardingModel {
+  const OnboardingModel({
+    required this.backgroundColor,
+    required this.title,
+    required this.description,
+    required this.iconColor,
+    this.imagePath,
+    this.iconData,
+  });
+  final String title;
+  final String description;
+  final String? imagePath;
+  final IconData? iconData;
+  final Color backgroundColor;
+  final Color iconColor;
 
   static final List<OnboardingModel> pages = [
     const OnboardingModel(

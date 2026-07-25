@@ -8,7 +8,7 @@ import 'package:ico_story_app/features/home/models/story_model.dart';
 import 'package:ico_story_app/features/home/views/home_view.dart';
 import 'package:ico_story_app/features/home/views/stories_list_view.dart';
 import 'package:ico_story_app/features/home/views/story_reader_screen.dart';
-import 'package:ico_story_app/features/onboarding/views/onboarding_view.dart';
+import 'package:ico_story_app/features/onboarding/presentation/views/onboarding_view.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
