@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
-import 'package:ico_story_app/features/home/widgets/common/custom_card_background.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/common/custom_card_background.dart';
 
 class CustomIconBackground extends StatelessWidget {
   const CustomIconBackground({required this.child, super.key, this.onTap});

@@ -4,10 +4,10 @@ import 'package:ico_story_app/core/router/app_routes.dart';
 import 'package:ico_story_app/core/router/app_transitions.dart';
 import 'package:ico_story_app/core/services/pref_keys.dart';
 import 'package:ico_story_app/core/services/shared_pref.dart';
-import 'package:ico_story_app/features/home/models/story_model.dart';
-import 'package:ico_story_app/features/home/views/home_view.dart';
-import 'package:ico_story_app/features/home/views/stories_list_view.dart';
-import 'package:ico_story_app/features/home/views/story_reader_screen.dart';
+import 'package:ico_story_app/features/home/data/models/story_model.dart';
+import 'package:ico_story_app/features/home/presentation/views/home_view.dart';
+import 'package:ico_story_app/features/home/presentation/views/stories_list_view.dart';
+import 'package:ico_story_app/features/home/presentation/views/story_reader_screen.dart';
 import 'package:ico_story_app/features/onboarding/presentation/views/onboarding_view.dart';
 
 class AppRouter {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/core/widgets/animate_do.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
-import 'package:ico_story_app/features/home/widgets/common/custom_card_background.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/common/custom_card_background.dart';
 import 'package:ico_story_app/features/onboarding/presentation/models/onboarding_model.dart';
 
 class OnboardingWidget extends StatelessWidget {

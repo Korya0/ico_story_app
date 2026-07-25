@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/router/app_routes.dart';
 import 'package:ico_story_app/core/widgets/animate_do.dart';
-import 'package:ico_story_app/features/home/data/story_categories_list.dart';
-import 'package:ico_story_app/features/home/widgets/home_view/home_story_card.dart';
+import 'package:ico_story_app/features/home/data/datasources/story_categories_list.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/home_view/home_story_card.dart';
 
 class StoriesCardsWidget extends StatelessWidget {
   const StoriesCardsWidget({super.key});

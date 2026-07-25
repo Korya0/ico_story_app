@@ -6,7 +6,7 @@ import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/cubit/audio_cubit.dart';
+import 'package:ico_story_app/features/home/presentation/cubits/audio_cubit.dart';
 
 class AudioControls extends StatefulWidget {
   const AudioControls({

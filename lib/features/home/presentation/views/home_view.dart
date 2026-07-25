@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ico_story_app/core/widgets/gap.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
-import 'package:ico_story_app/features/home/widgets/home_view/home_header_section.dart';
-import 'package:ico_story_app/features/home/widgets/home_view/social_button.dart';
-import 'package:ico_story_app/features/home/widgets/home_view/stories_card_widget.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/home_view/home_header_section.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/home_view/social_button.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/home_view/stories_card_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
-import 'package:ico_story_app/features/home/models/story_model.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/audio_controls.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/cubit/audio_cubit.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/pdf_book_flip_local.dart';
-import 'package:ico_story_app/features/home/widgets/story_reader/story_reader_header.dart';
+import 'package:ico_story_app/features/home/data/models/story_model.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/story_reader/audio_controls.dart';
+import 'package:ico_story_app/features/home/presentation/cubits/audio_cubit.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/story_reader/pdf_book_flip_local.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/story_reader/story_reader_header.dart';
 
 class StoryReaderView extends StatefulWidget {
   const StoryReaderView({required this.story, super.key, this.categoryId});

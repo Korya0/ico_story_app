@@ -3,8 +3,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ico_story_app/core/router/app_routes.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
-import 'package:ico_story_app/features/home/data/story_list.dart';
-import 'package:ico_story_app/features/home/widgets/stories_list/story_list_card.dart';
+import 'package:ico_story_app/features/home/data/datasources/story_list.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/stories_list/story_list_card.dart';
 
 class StoriesListSection extends StatelessWidget {
   const StoriesListSection({required this.categoryTitle, super.key});

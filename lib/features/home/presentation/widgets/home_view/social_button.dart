@@ -4,8 +4,8 @@ import 'package:ico_story_app/core/constants/app_assets.dart';
 import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/widgets/custom_text.dart';
-import 'package:ico_story_app/features/home/widgets/home_view/social_media_row.dart';
-import 'package:ico_story_app/features/home/widgets/common/custom_card_background.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/home_view/social_media_row.dart';
+import 'package:ico_story_app/features/home/presentation/widgets/common/custom_card_background.dart';
 
 class SocialButton extends StatelessWidget {
   const SocialButton({super.key});

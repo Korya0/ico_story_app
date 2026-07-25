@@ -1,5 +1,5 @@
 import 'package:ico_story_app/core/constants/app_keys.dart';
-import 'package:ico_story_app/features/home/models/story_model.dart';
+import 'package:ico_story_app/features/home/data/models/story_model.dart';
 
 class StoryList {
   static List<StoryModel> getTarbawiaStories = [
