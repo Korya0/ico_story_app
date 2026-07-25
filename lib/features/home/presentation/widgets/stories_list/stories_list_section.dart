@@ -3,7 +3,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ico_story_app/core/router/app_routes.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
-import 'package:ico_story_app/features/home/data/datasources/story_list.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ico_story_app/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/stories_list/story_list_card.dart';
 
 class StoriesListSection extends StatelessWidget {
@@ -15,27 +16,38 @@ class StoriesListSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTablet = context.isTablet;
 
-    final stories = StoryList.getStoriesForCategory(categoryTitle);
-
-    return MasonryGridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: isTablet ? 2 : 2,
-      mainAxisSpacing: 12,
-      crossAxisSpacing: 12,
-      itemCount: stories.length,
-      itemBuilder: (context, index) {
-        final story = stories[index];
-        return StoryListCard(
-          title: story.title,
-          imagePath: story.coverImage,
-          onTap: () {
-            context.pushNamed(
-              AppRoutes.storyReader,
-              extra: {'story': story, 'categoryId': categoryTitle},
-            );
-          },
-        );
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeLoading) {
+          return const Center(child: Padding(
+            padding: EdgeInsets.all(20),
+            child: CircularProgressIndicator(),
+          ));
+        } else if (state is HomeStoriesLoaded) {
+          final stories = state.stories;
+          return MasonryGridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: isTablet ? 2 : 2,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            itemCount: stories.length,
+            itemBuilder: (context, index) {
+              final story = stories[index];
+              return StoryListCard(
+                title: story.title,
+                imagePath: story.coverImage,
+                onTap: () {
+                  context.pushNamed(
+                    AppRoutes.storyReader,
+                    extra: {'story': story, 'categoryId': categoryTitle},
+                  );
+                },
+              );
+            },
+          );
+        }
+        return const SizedBox();
       },
     );
   }
