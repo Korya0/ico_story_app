@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ico_story_app/core/constants/app_constant.dart';
@@ -7,7 +8,11 @@ import 'package:ico_story_app/core/style/app_theme.dart';
 
 void main() async {
   await AppInitializer.initialize();
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
