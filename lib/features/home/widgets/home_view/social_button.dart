@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:ico_story_app/core/widgets/gap.dart';
 import 'package:ico_story_app/core/constants/app_assets.dart';
 import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/constants/app_strings.dart';

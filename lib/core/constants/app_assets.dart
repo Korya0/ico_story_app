@@ -12,10 +12,10 @@ class AppAssets {
   static const String directAid = 'assets/images/app/direct_aid.png';
   static const String icoLogoAlt = 'assets/images/app/ico_logo.png';
 
-  static const String facebook = 'assets/images/social/facebook.svg';
-  static const String insta = 'assets/images/social/insta.svg';
-  static const String threads = 'assets/images/social/threads.svg';
-  static const String x = 'assets/images/social/x.svg';
+  static const String facebook = 'assets/svgs/facebook.svg';
+  static const String insta = 'assets/svgs/insta.svg';
+  static const String threads = 'assets/svgs/threads.svg';
+  static const String x = 'assets/svgs/x.svg';
 
   static const String charsStories = 'assets/images/labels/char.png';
   static const String knoozStories = 'assets/images/labels/knooz.png';
