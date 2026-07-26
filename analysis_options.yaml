@@ -18,6 +18,7 @@ analyzer:
     - "lib/core/constants/generated/**"
     - "lib/core/networking/firebase/**"
 
+
 linter:
   rules:
     always_declare_return_types: true
