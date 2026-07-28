@@ -1,6 +1,3 @@
-# ico_story_app
-
-<!-- Badges at Top -->
 <p align="center">
   <a href="https://github.com/Korya0/ico_story_app">
     <img src="https://img.shields.io/github/forks/Korya0/ico_story_app" alt="forks" />
