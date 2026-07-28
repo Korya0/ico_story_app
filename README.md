@@ -1,7 +1,7 @@
 # ico_story_app
 
 <!-- Badges at Top -->
-<p>
+<p align="center">
   <a href="https://github.com/Korya0/ico_story_app">
     <img src="https://img.shields.io/github/forks/Korya0/ico_story_app" alt="forks" />
   </a>
@@ -18,7 +18,7 @@
 
 
 <!-- Links Section -->
-<p>
+<p align="center">
 <a href="https://mostaql.com/u/Korya/reviews/9118016">
   <img src="https://img.shields.io/badge/⭐_Client_Review-0077B5?style=for-the-badge" alt="Client Review"/>
 </a>
@@ -26,6 +26,23 @@
   <img src="https://img.shields.io/badge/💬_LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
 </a>
 </p>
+
+---
+
+## 📸 App Preview
+
+<div align="center">
+
+<img src="screenshots/ico_bannar.jpg" width="100%" alt="App Banner" />
+
+<br/>
+<br/>
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="screenshots/ico_1.png" width="200"/> | <img src="screenshots/ico_2.png" width="200"/> | <img src="screenshots/ico_3.png" width="200"/> |
+
+</div>
 
 ---
 
@@ -83,23 +100,6 @@
 - **Audio**: `audioplayers / just_audio`
 - **Animations**: `animate_do`
 - **Utilities**: `logger`, `shared_preferences`, `url_launcher`
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-
-<img src="screenshots/ico_bannar.jpg" width="100%" alt="App Banner" />
-
-<br/>
-<br/>
-
-| | | |
-|:---:|:---:|:---:|
-| <img src="screenshots/ico_1.png" width="200"/> | <img src="screenshots/ico_2.png" width="200"/> | <img src="screenshots/ico_3.png" width="200"/> |
-
-</div>
 
 ---
 
