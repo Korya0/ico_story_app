@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ico_story_app/core/di/service_locator.dart';
 import 'package:ico_story_app/core/widgets/gap.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
-import 'package:ico_story_app/features/home/data/repositories/home_repository.dart';
 import 'package:ico_story_app/features/home/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/home_view/home_header_section.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/home_view/social_button.dart';
@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
     final isTablet = context.isTablet;
 
     return BlocProvider(
-      create: (context) => HomeCubit(repository: HomeRepository())..getCategories(),
+      create: (context) => sl<HomeCubit>()..getCategories(),
       child: Scaffold(
         backgroundColor: AppColors.primary,
         body: Padding(

@@ -1,17 +1,18 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ico_story_app/core/constants/app_constant.dart';
 import 'package:ico_story_app/core/router/app_router.dart';
-import 'package:ico_story_app/core/utils/app_initializer.dart';
 import 'package:ico_story_app/core/style/app_theme.dart';
+import 'package:ico_story_app/core/utils/app_initializer.dart';
 
 void main() async {
   await AppInitializer.initialize();
   runApp(
-    DevicePreview(
-      builder: (context) => const MyApp(),
-    ),
+    kIsWeb & kDebugMode
+        ? DevicePreview(builder: (context) => const MyApp())
+        : const MyApp(),
   );
 }
 

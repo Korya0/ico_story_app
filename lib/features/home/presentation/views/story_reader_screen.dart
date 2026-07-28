@@ -108,8 +108,8 @@ class _StoryReaderViewState extends State<StoryReaderView>
                 onAudioToggle: _isSurah
                     ? null
                     : () => setState(() {
-                        _showAudioControls = !_showAudioControls;
-                      }),
+                          _showAudioControls = !_showAudioControls;
+                        }),
                 storyType: _storyTypeLabel,
                 isAudioVisible: _showAudioControls && !_isSurah,
               ),
