@@ -5,7 +5,7 @@ import 'package:ico_story_app/core/constants/app_strings.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/features/home/data/models/story_model.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/story_reader/audio_controls.dart';
-import 'package:ico_story_app/features/home/presentation/cubits/audio_cubit.dart';
+import 'package:ico_story_app/features/home/presentation/controller/audio_cubit/audio_cubit.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/story_reader/pdf_book_flip_local.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/story_reader/story_reader_header.dart';
 

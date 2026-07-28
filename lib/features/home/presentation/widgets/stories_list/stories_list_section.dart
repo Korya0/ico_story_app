@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ico_story_app/core/router/app_routes.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ico_story_app/features/home/presentation/cubits/home_cubit/home_cubit.dart';
+import 'package:ico_story_app/features/home/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/stories_list/story_list_card.dart';
 
 class StoriesListSection extends StatelessWidget {

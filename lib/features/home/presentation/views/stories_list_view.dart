@@ -4,7 +4,7 @@ import 'package:ico_story_app/core/widgets/gap.dart';
 import 'package:ico_story_app/core/style/app_colors.dart';
 import 'package:ico_story_app/core/utils/context_extension.dart';
 import 'package:ico_story_app/features/home/data/repositories/home_repository.dart';
-import 'package:ico_story_app/features/home/presentation/cubits/home_cubit/home_cubit.dart';
+import 'package:ico_story_app/features/home/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:ico_story_app/features/home/presentation/utils/home_functions.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/stories_list/stories_list_header.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/stories_list/stories_list_section.dart';

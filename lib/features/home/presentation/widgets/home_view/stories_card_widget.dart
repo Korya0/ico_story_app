@@ -4,7 +4,7 @@ import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/router/app_routes.dart';
 import 'package:ico_story_app/core/widgets/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ico_story_app/features/home/presentation/cubits/home_cubit/home_cubit.dart';
+import 'package:ico_story_app/features/home/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:ico_story_app/features/home/presentation/widgets/home_view/home_story_card.dart';
 
 class StoriesCardsWidget extends StatelessWidget {
