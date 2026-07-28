@@ -1,9 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:ico_story_app/core/constants/app_keys.dart';
 import 'package:ico_story_app/core/router/app_routes.dart';
-import 'package:ico_story_app/core/router/app_transitions.dart';
-import 'package:ico_story_app/core/services/pref_keys.dart';
-import 'package:ico_story_app/core/services/shared_pref.dart';
+import 'package:ico_story_app/core/services/local_storage/pref_keys.dart';
+import 'package:ico_story_app/core/services/local_storage/shared_pref.dart';
 import 'package:ico_story_app/features/home/data/models/story_model.dart';
 import 'package:ico_story_app/features/home/presentation/views/home_view.dart';
 import 'package:ico_story_app/features/home/presentation/views/stories_list_view.dart';
@@ -19,43 +18,31 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.onboarding,
         name: AppRoutes.onboarding,
-        pageBuilder: (context, state) => naturalTransition(
-          state: state,
-          child: const OnboardingView(),
-        ),
+        builder: (context, state) => const OnboardingView(),
       ),
       GoRoute(
         path: AppRoutes.home,
         name: AppRoutes.home,
-        pageBuilder: (context, state) => naturalTransition(
-          state: state,
-          child: const HomeView(),
-        ),
+        builder: (context, state) => const HomeView(),
       ),
       GoRoute(
         path: AppRoutes.storiesList,
         name: AppRoutes.storiesList,
-        pageBuilder: (context, state) {
+        builder: (context, state) {
           final extras = state.extra as Map<String, dynamic>?;
-          return naturalTransition(
-            state: state,
-            child: StoriesListView(
-              categoryTitle: extras![AppKeys.categoryTitle] as String,
-            ),
+          return StoriesListView(
+            categoryTitle: extras![AppKeys.categoryTitle] as String,
           );
         },
       ),
       GoRoute(
         path: AppRoutes.storyReader,
         name: AppRoutes.storyReader,
-        pageBuilder: (context, state) {
+        builder: (context, state) {
           final extras = state.extra! as Map<String, dynamic>;
           final story = extras['story'] as StoryModel;
           final categoryId = extras['categoryId'] as String?;
-          return naturalTransition(
-            state: state,
-            child: StoryReaderView(story: story, categoryId: categoryId),
-          );
+          return StoryReaderView(story: story, categoryId: categoryId);
         },
       ),
     ],
